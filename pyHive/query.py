@@ -1,6 +1,7 @@
 from pyhive import hive
 import config
 import sys
+import re
 
 class HiveConnection(object):
     _conn = None
@@ -25,6 +26,14 @@ def main():
     CITY = args[1]
     START_DATE = args[2]
     END_DATE = args[3]
+
+    start_date_match = re.match("^[0-9]{2}/[0-9]{2}/[0-9]{4}$", START_DATE)
+    end_date_match = re.match("^[0-9]{2}/[0-9]{2}/[0-9]{4}$", END_DATE)
+
+    if not bool(start_date_match) or not bool(end_date_match):
+        print("Unrecognizable date in args")
+        print("Example: python query.py NYC 01/01/2018 01/01/2020")
+        sys.exit()
 
     conn = HiveConnection()
     cursor = conn.cursor()
