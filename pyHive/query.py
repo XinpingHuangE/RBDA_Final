@@ -40,7 +40,7 @@ def main():
     cursor.execute(config.USE_CMD)
 
     # run query
-    RANGE_QUERY = "SELECT location, bucket, sum(severity)/count(severity), avg(latitude) as avg_lat, avg(longitude) as avg_lon as crime_rate FROM {} WHERE city='{}' AND crime_date>='{}' AND crime_date<='{} GROUP BY location, bucket'".format(config.TABLE,CITY,START_DATE,END_DATE)
+    RANGE_QUERY = "SELECT location, bucket, sum(severity)/count(severity) as crime_rate, avg(latitude) as avg_lat, avg(longitude) as avg_lon FROM {} WHERE city='{}' AND crime_date>='{}' AND crime_date<='{} GROUP BY location, bucket'".format(config.TABLE,CITY,START_DATE,END_DATE)
     print("range query: ",RANGE_QUERY)
 
     results = runQuery(cursor,RANGE_QUERY)
