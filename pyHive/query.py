@@ -17,21 +17,22 @@ def runQuery(cursor,query):
 
 def main():
     args = sys.argv
-    print(args,len(args))
-    if len(args) != 4:
-        print("USAGE: python query.py <CITY> <START_DATE> <END_DATE>")
-        print("Example: python query.py NYC 01/01/2018 01/01/2020")
-        sys.exit()
+    # print(args,len(args))
+    # if len(args) != 4:
+    #     print("USAGE: python query.py <CITY> <START_DATE> <END_DATE>")
+    #     print("Example: python query.py NYC 01/01/2018 01/01/2020")
+    #     sys.exit()
     
-    CITY = args[1]
-    START_DATE = args[2]
-    END_DATE = args[3]
+    # INPUT FROM USER
+    CITY = input("ENTER CITY (NYC/LA/CHI): ")
+    START_DATE = input("ENTER VALID START DATE (ex: 01/01/2012): ")
+    END_DATE = input("ENTER VALID END DATE (ex: 01/01/2018): ")
 
     start_date_match = re.match("^[0-9]{2}/[0-9]{2}/[0-9]{4}$", START_DATE)
     end_date_match = re.match("^[0-9]{2}/[0-9]{2}/[0-9]{4}$", END_DATE)
 
     if not bool(start_date_match) or not bool(end_date_match):
-        print("Unrecognizable date in args")
+        print("Invalid date format")
         print("Example: python query.py NYC 01/01/2018 01/01/2020")
         sys.exit()
 
@@ -40,7 +41,8 @@ def main():
     cursor.execute(config.USE_CMD)
 
     # run query
-    RANGE_QUERY = "SELECT location, bucket, sum(severity)/count(severity) as crime_rate, avg(latitude) as avg_lat, avg(longitude) as avg_lon FROM {} WHERE city='{}' AND crime_date>='{}' AND crime_date<='{}' GROUP BY location, bucket".format(config.TABLE,CITY,START_DATE,END_DATE)
+    # RANGE_QUERY = "SELECT location, bucket, sum(severity)/count(severity) as crime_rate, avg(latitude) as avg_lat, avg(longitude) as avg_lon FROM {} WHERE city='{}' AND crime_date>='{}' AND crime_date<='{}' GROUP BY location, bucket".format(config.TABLE,CITY,START_DATE,END_DATE)
+    RANGE_QUERY = "SELECT location, sum(severity)/count(severity) as crime_rate, avg(latitude) as avg_lat, avg(longitude) as avg_lon FROM {} WHERE city='{}' AND crime_date>='{}' AND crime_date<='{}' GROUP BY location".format(config.TABLE,CITY,START_DATE,END_DATE)
     print("range query: ",RANGE_QUERY)
 
     results = runQuery(cursor,RANGE_QUERY)
