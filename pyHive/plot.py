@@ -1,7 +1,7 @@
-import sys
-import pip
+import os
+import pandas
 
-class Data:
+class Plot:
     def __init__(self):
         pass
     
