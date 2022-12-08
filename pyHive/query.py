@@ -16,13 +16,11 @@ class HiveConnection(object):
 def writeResult(results):
     f = open(config.RESULT_FILE_PATH,'w')
     csv_writer = csv.writer(f)
-
+    csv_writer.writerow(['loc','severity_index','latitude','longitude'])
     try:
         for result in results:
-            row = ""
-            for val in result:
-                row += str(val) + ","
-            csv_writer.writerow([row[:-1]])
+            result = list(result)
+            csv_writer.writerow(result)
     except Exception as e:
         print("EXCEPTION RAISED IN WRITING RESULT TO FILE: ",e)
         sys.exit()
