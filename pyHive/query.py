@@ -13,10 +13,10 @@ class HiveConnection(object):
             cls._conn = hive.Connection(host=config.HIVE_HOST, port=config.PORT, username=config.USERNAME)
             return cls._conn
 
-def writeResult(results):
+def writeResult(results,headers=None):
     f = open(config.RESULT_FILE_PATH,'w')
     csv_writer = csv.writer(f)
-    csv_writer.writerow(['loc','severity_index','latitude','longitude'])
+    csv_writer.writerow(headers)
     try:
         for result in results:
             result = list(result)
@@ -61,12 +61,13 @@ def main():
     # run query
     # RANGE_QUERY = "SELECT location, bucket, sum(severity)/count(severity) as crime_rate, avg(latitude) as avg_lat, avg(longitude) as avg_lon FROM {} WHERE city='{}' AND crime_date>='{}' AND crime_date<='{}' GROUP BY location, bucket".format(config.TABLE,CITY,START_DATE,END_DATE)
     # select location,crime_date from crimes where from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy')) >= from_unixtime(unix_timestamp('01/01/2012' ,'MM/dd/yyyy')) and from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy')) <= from_unixtime(unix_timestamp('01/01/2014', 'MM/dd/yyyy'));
-    RANGE_QUERY_PER_CRIME = "SELECT location, category, sum(severity)/count(severity) as crime_rate FROM {} WHERE from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY location, crime".format(config.TABLE,CITY,START_DATE,END_DATE)
-    RANGE_QUERY = "SELECT location, sum(severity)/count(severity) as crime_rate, avg(latitude) as avg_lat, avg(longitude) as avg_lon FROM {} WHERE city='{}' AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY location".format(config.TABLE,CITY,START_DATE,END_DATE)
+    RANGE_QUERY_PER_CRIME = "SELECT city, location, category, count(severity) FROM {} WHERE from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY city, location, category".format(config.TABLE,START_DATE,END_DATE)
+    RANGE_QUERY = "SELECT city, location, sum(severity)/count(severity) as crime_index FROM {} WHERE city = '{}' AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY city, location".format(config.TABLE,CITY,START_DATE,END_DATE)
+    # RANGE_QUERY_PER_CRIME = "SELECT city, location, sum(severity)/count(severity) FROM {} WHERE from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY city, location, category".format(config.TABLE,START_DATE,END_DATE)
     print("range query: ",RANGE_QUERY)
 
     results = runQuery(cursor,RANGE_QUERY)
-    writeResult(results)
+    writeResult(results,['city','location','crime_index'])
 
 if __name__ == "__main__":
     main()

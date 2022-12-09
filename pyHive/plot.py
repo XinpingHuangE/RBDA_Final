@@ -15,5 +15,5 @@ class Plot:
 
 if __name__ == "__main__":
     plot = Plot()
-    plot.readData()
+    plot.readData() 
     plot.printData()

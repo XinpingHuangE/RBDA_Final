@@ -1,0 +1,6 @@
+ SELECT location, category, count(severity) as crime_rate 
+ FROM crimes 
+ WHERE location = 'BROOKLYN'
+ AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('01/01/2012' ,'MM/dd/yyyy')) 
+ AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('31/12/2013', 'MM/dd/yyyy')) 
+ GROUP BY location, category;
