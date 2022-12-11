@@ -5,10 +5,10 @@
  AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('31/12/2013', 'MM/dd/yyyy')) 
  GROUP BY location, category;
  
- SELECT city, year, location, sum(severity)/count(severity) as crime_rate 
+ SELECT city, substr(crime_date, 7,10) as year, location, sum(severity)/count(severity) as crime_rate 
  FROM crimes 
  WHERE city = 'CHICAGO' 
- GROUP BY city, year, location
+ GROUP BY city, substr(crime_date, 7,10), location
  
  SELECT city, bucket, location, sum(severity)/count(severity) as crime_rate 
  FROM crimes 
