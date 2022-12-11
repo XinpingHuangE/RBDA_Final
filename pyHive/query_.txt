@@ -25,3 +25,8 @@
  AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('12/31/2021', 'MM/dd/yyyy')) 
  GROUP BY city, bucket
  (change AREA to area of the city)
+
+area:
+chicago 234.5
+la 502
+nyc 302.6
