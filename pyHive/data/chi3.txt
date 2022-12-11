@@ -1,7 +1,0 @@
-state,city,community,category,crime_count
-Illinois,CHICAGO,Albany Park,MAJOR THEFT,912
-Illinois,CHICAGO,Austin,FRAUD,1219
-Illinois,CHICAGO,Deering,LYNCHING,115
-Illinois,CHICAGO,Grand Central,FRAUD,2313
-Illinois,CHICAGO,Grand Crossing,SEXUAL OFFENCES,387
-Illinois,CHICAGO,Harrison,ASSAULT,17641

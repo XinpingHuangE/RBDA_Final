@@ -63,10 +63,11 @@ def main():
     # select location,crime_date from crimes where from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy')) >= from_unixtime(unix_timestamp('01/01/2012' ,'MM/dd/yyyy')) and from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy')) <= from_unixtime(unix_timestamp('01/01/2014', 'MM/dd/yyyy'));
     RANGE_QUERY_PER_CRIME = "SELECT city, location, category, count(severity) FROM {} WHERE from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY city, location, category".format(config.TABLE,START_DATE,END_DATE)
     RANGE_QUERY = "SELECT city, location, sum(severity)/count(severity) as crime_index FROM {} WHERE city = '{}' AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY city, location".format(config.TABLE,CITY,START_DATE,END_DATE)
+    CITY_WISE_PER_HOUR_CRIME_RATE_QUERY = "SELECT city, bucket, location, sum(CAST(severity AS BIGINT))/count(severity) as crime_rate FROM crimes WHERE city = 'NYC' AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('01/01/2019' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('12/31/2021', 'MM/dd/yyyy')) GROUP BY city, bucket, location"
     # RANGE_QUERY_PER_CRIME = "SELECT city, location, sum(severity)/count(severity) FROM {} WHERE from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))>=from_unixtime(unix_timestamp('{}' ,'MM/dd/yyyy')) AND from_unixtime(unix_timestamp(crime_date , 'MM/dd/yyyy'))<=from_unixtime(unix_timestamp('{}', 'MM/dd/yyyy')) GROUP BY city, location, category".format(config.TABLE,START_DATE,END_DATE)
-    print("range query: ",RANGE_QUERY)
+    print("range query: ",CITY_WISE_PER_HOUR_CRIME_RATE_QUERY)
 
-    results = runQuery(cursor,RANGE_QUERY)
+    results = runQuery(cursor,CITY_WISE_PER_HOUR_CRIME_RATE_QUERY)
     writeResult(results,['city','location','crime_index'])
 
 if __name__ == "__main__":

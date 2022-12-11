@@ -1,7 +1,0 @@
-state,city,district,category,crime_count
-Illinois,CHICAGO,Far North Side Park,MAJOR THEFT,912
-Illinois,CHICAGO,Northwest Side,FRAUD,1219
-Illinois,CHICAGO,North Side,LYNCHING,115
-Illinois,CHICAGO,Central Chicago,FRAUD,2313
-Illinois,CHICAGO,West Side,SEXUAL OFFENCES,387
-Illinois,CHICAGO,South Side,ASSAULT,17641
