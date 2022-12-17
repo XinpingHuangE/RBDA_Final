@@ -1,7 +1,7 @@
 import os
 
 # Credentials
-USERNAME = "ak8288_nyu_edu"
+USERNAME = "xh2329_nyu_edu"
 PORT = 10000
 HIVE_HOST = "localhost"
 RESULT_FILE_PATH = "results.csv"
