@@ -6,6 +6,7 @@
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
     <_.fcp.MarkAnimation.true...MarkAnimation />
     <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelExtractV2.true...ObjectModelExtractV2 />
     <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
     <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
     <SheetIdentifierTracking />
@@ -26,7 +27,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='results_Yearly_La' name='textscan.1k1pauo1ec9gbi1dyfii70515qih'>
-            <connection class='textscan' directory='/Users/sarvani/Documents/NYUCoursework/Fall2022/RBDA/Project/project/RBDA_Final/pyHive' filename='results_Yearly_La.csv' password='' server='' />
+            <connection class='textscan' directory='/Users/sarvani/Documents/NYUCoursework/Fall2022/RBDA/Project/project/RBDA_Final/pyHive/results/LA_results' filename='results_Yearly_La.csv' password='' server='' />
           </named-connection>
         </named-connections>
         <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1k1pauo1ec9gbi1dyfii70515qih' name='results_Yearly_La.csv' table='[results_Yearly_La#csv]' type='table'>
@@ -75,7 +76,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LEN_RUS' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_573124392EEF4EC58BC6910A64F6BB9D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>year</remote-name>
@@ -87,7 +88,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_573124392EEF4EC58BC6910A64F6BB9D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>location</remote-name>
@@ -102,7 +103,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LEN_RUS' />
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_573124392EEF4EC58BC6910A64F6BB9D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>severity_index</remote-name>
@@ -114,23 +115,92 @@
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
-            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_573124392EEF4EC58BC6910A64F6BB9D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
-      <_.fcp.ObjectModelTableType.true...column caption='results_Yearly_La.csv' datatype='table' name='[__tableau_internal_object_id__].[results_Yearly_La.csv_573124392EEF4EC58BC6910A64F6BB9D]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='results_Yearly_La.csv' datatype='table' name='[__tableau_internal_object_id__].[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]' role='measure' type='quantitative' />
       <column caption='City' datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
       <column caption='Location' datatype='string' name='[location]' role='dimension' type='nominal' />
       <column caption='Severity Index' datatype='real' name='[severity_index]' role='measure' type='quantitative' />
       <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/sarvani/Documents/NYUCoursework/Fall2022/RBDA/Project/project/RBDA_Final/pyHive/results/LA_results/results_Yearly_La.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='12/18/2022 11:32:24 PM' username='tableau_internal_user'>
+          <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='results_Yearly_La' increment-value='%null%' refresh-type='create' rows-inserted='231' timestamp-start='2022-12-18 23:32:24.855' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[city]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>city</remote-alias>
+              <ordinal>0</ordinal>
+              <family>results_Yearly_La.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>year</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[year]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>year</remote-alias>
+              <ordinal>1</ordinal>
+              <family>results_Yearly_La.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>11</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>location</remote-alias>
+              <ordinal>2</ordinal>
+              <family>results_Yearly_La.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>21</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>severity_index</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[severity_index]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>severity_index</remote-alias>
+              <ordinal>3</ordinal>
+              <family>results_Yearly_La.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>231</approx-count>
+              <contains-null>true</contains-null>
+              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
       <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
       <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
         <objects>
-          <object caption='results_Yearly_La.csv' id='results_Yearly_La.csv_573124392EEF4EC58BC6910A64F6BB9D'>
+          <object caption='results_Yearly_La.csv' id='results_Yearly_La.csv_3F60255211FC4632A819D532C0CAF0E1'>
             <properties context=''>
               <relation connection='textscan.1k1pauo1ec9gbi1dyfii70515qih' name='results_Yearly_La.csv' table='[results_Yearly_La#csv]' type='table'>
                 <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
@@ -140,6 +210,9 @@
                   <column datatype='real' name='severity_index' ordinal='3' />
                 </columns>
               </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
             </properties>
           </object>
         </objects>
